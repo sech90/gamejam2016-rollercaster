@@ -20,7 +20,7 @@ public class SpellController : MonoBehaviour {
 		if (!other.gameObject)
 			return;
 		SpellController sc = other.gameObject.GetComponent<SpellController> ();
-		if (!sc)
+		if (!sc || spell.owner.id == sc.spell.owner.id)
 			return;
 		Debug.Log ("pitching " + spell + " against " + sc.spell);
 		if (!spell.Resolve (sc.spell)) {

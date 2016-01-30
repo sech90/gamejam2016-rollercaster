@@ -4,10 +4,17 @@ using System.Collections;
 [Serializable]
 public class Spell {
 	public int id;
-	public Type type;
+	public SpellType type;
 	public int level;
 	public int baseSize;
 	public int baseSpeed;
+	public Wizard owner;
+
+	public Spell (SpellType type, int level)
+	{
+		this.type = type;
+		this.level = level;
+	}
 
 	/// <summary>
 	/// Resolve the outcome of a collision with another spell.
@@ -22,9 +29,10 @@ public class Spell {
 			return true;
 		}
 	}
+
 }
 
-public enum Type {
+public enum SpellType {
 	Balance,
 	Speed,
 	Power
