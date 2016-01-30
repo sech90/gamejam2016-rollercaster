@@ -8,6 +8,8 @@ public class Spell {
 	public int level = 1;
 	public int baseSize;
 	public int baseSpeed;
+	public float damage;
+
 	public Wizard owner;
 
 	public Spell (SpellType type, int level)
