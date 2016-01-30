@@ -15,7 +15,7 @@ public class Destroy : MonoBehaviour {
 	}
 	MeshFilter HoleInTheWall(MeshFilter filter,float x,float y,float z,Spell spell)
 	{
-		float pow = spell.level;
+		float pow = spell.damage;
 		Vector3[] vertices = filter.mesh.vertices;
 		List<int> indices = new List<int>(filter.mesh.triangles);
 		int count = indices.Count / 3;
@@ -35,6 +35,7 @@ public class Destroy : MonoBehaviour {
 		return filter;
 	}
 	void Start () {
+		spell.damage=1.0f;
 	}
 	
 	// Update is called once per frame
