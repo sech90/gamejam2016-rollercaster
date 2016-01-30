@@ -75,7 +75,7 @@ public class CreateCircular : ScriptableWizard
 			Vector3 V3 = vertices[indices[i * 3 + 2]];
 			float tmp = width*width/4;
 			//Debug.Log(V1.x +" "+V1.y+" "+V1.z );
-			if (minx > V1.x)
+			/*if (minx > V1.x)
 				minx = V1.x;
 			if (minx > V2.x)
 				minx = V2.x;
@@ -88,8 +88,9 @@ public class CreateCircular : ScriptableWizard
 				maxx = V2.x;
 			if (maxx < V3.x)
 				maxx = V3.x;
-
+*/
 			//if ( (V1.z*V1.z+V1.x*V1.x) > tmp )
+
 			if ( (V1.z*V1.z+V1.x*V1.x) > tmp && (V2.z*V2.z+V2.x*V2.x) >tmp  && (V3.z*V3.z+V3.x*V3.x) > tmp)
 			{
 			//	Debug.Log(V1.z*V1.z+V1.x*V1.x);
