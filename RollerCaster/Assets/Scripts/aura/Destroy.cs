@@ -6,6 +6,7 @@ public class Destroy : MonoBehaviour {
 	public float x=0;
 	public float y=0;
 	public float z=0;
+
 	public Spell spell = new Spell(SpellType.Balance,1);
 
 	// Use this for initialization
@@ -22,9 +23,9 @@ public class Destroy : MonoBehaviour {
 	
 		for (int i = count - 1; i >= 0; i--)
 		{
-			Vector3 V1 = vertices[indices[i * 3 + 0]];
-			Vector3 V2 = vertices[indices[i * 3 + 1]];
-			Vector3 V3 = vertices[indices[i * 3 + 2]];
+			Vector3 V1 = transform.InverseTransformPoint(vertices[indices[i * 3 + 0]]);
+			Vector3 V2 = transform.InverseTransformPoint(vertices[indices[i * 3 + 1]]);
+			Vector3 V3 = transform.InverseTransformPoint(vertices[indices[i * 3 + 2]]);
 
 			if (Distance(V1,x,y,z)< pow)
 			{
@@ -35,6 +36,7 @@ public class Destroy : MonoBehaviour {
 		return filter;
 	}
 	void Start () {
+		
 		spell.damage=1.0f;
 	}
 	
