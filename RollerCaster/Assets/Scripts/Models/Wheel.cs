@@ -2,28 +2,43 @@
 using UnityEngine.UI;
 using System;
 using System.Collections;
+using CnControls;
 
 [Serializable]
 public class Wheel : MonoBehaviour {
 	public Spell spell;
-	public bool available;
+	public bool IsAvailable{get{return available;}}
 
-	public Sprite[] speedSprites;
-	public Sprite[] powerSprites;
-	public Sprite[] balanceSprites;
+	private SimpleJoystick joystick;
+	private bool available;
+
 
 	// When the Wheel is initialized
 	void Start() {
 		Randomize ();
+		joystick = GetComponentInChildren<SimpleJoystick>();
+		//joystick.gameObject.SetActive(false);
 	}
 
 	/// <summary>
 	/// Get the next random spell.
 	/// </summary>
 	public void Randomize() {
-		spell = new Spell ((SpellType)UnityEngine.Random.Range(0, 3), 1);
+		spell = SpellDB.GetRandom();
 		Debug.Log ("New spell: " + spell.type);
 		updateSprite ();
+		available = true;
+	}
+
+	public void CastSpell(){
+		
+	}
+
+	public void OnSpellDestroyed(Spell s){
+		if(s.id != spell.id)
+			return;
+
+
 	}
 
 	/// <summary>
@@ -32,30 +47,21 @@ public class Wheel : MonoBehaviour {
 	/// <param name="next">The spell to stack on the top.</param>
 	/// <returns>True if the stacking is successful</returns>
 	public bool Stack(Spell next) {
-		if (spell.type != next.type || spell.level + next.level > 3) {
+		if (!spell.Stack(next)) {
 			Debug.Log ("Stack failed");
 			updateSprite ();
 			return false;
 		} else {
 			Debug.Log ("Stack success");
-			spell.level += next.level;
 			updateSprite ();
 			return true;
 		}
 	}
 
 	public void updateSprite() {
-		switch (spell.type) {
-		case SpellType.Speed:
-			gameObject.GetComponentInChildren<Image> ().sprite = speedSprites [spell.level - 1];
-			break;
-		case SpellType.Power:
-			gameObject.GetComponentInChildren<Image> ().sprite = powerSprites [spell.level - 1];
-			break;
-		case SpellType.Balance:
-			gameObject.GetComponentInChildren<Image> ().sprite = balanceSprites [spell.level - 1];
-			break;
-		}
+		
+		gameObject.GetComponentInChildren<Image> ().sprite = spell.Sprite;
+
 	}
 
 }

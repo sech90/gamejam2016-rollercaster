@@ -1,14 +1,23 @@
 ﻿using System;
 using System.Collections;
+using UnityEngine;
 
 [Serializable]
 public class Spell {
 	public int id;
 	public SpellType type;
 	public int level = 1;
-	public int baseSize;
-	public int baseSpeed;
-	public float damage;
+	public int baseSize = 1;
+	public int baseSpeed = 1;
+	public int baseDamage = 1;
+
+	public int Size{get{return baseSize * level;}}
+	public int Speed{get{return baseSpeed * level;}}
+	public int Damage{get{return baseDamage * level;}}
+	public Sprite Sprite{get{return sprites[level-1];}}
+
+	public GameObject prefab;
+	public Sprite[] sprites;
 
 	public Wizard owner;
 
@@ -30,6 +39,14 @@ public class Spell {
 			level -= other.level;
 			return true;
 		}
+	}
+
+	public bool Stack(Spell other){
+		if(type != other.type || level + other.level > 3)
+			return false;
+
+		level += other.level;
+		return true;
 	}
 
 }

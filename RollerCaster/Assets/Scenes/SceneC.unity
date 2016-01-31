@@ -366,6 +366,48 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!1001 &136347907
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 496024, guid: ee3c8f7bd6f4a86449ec2a55ec8542b5, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 8.86
+      objectReference: {fileID: 0}
+    - target: {fileID: 496024, guid: ee3c8f7bd6f4a86449ec2a55ec8542b5, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 496024, guid: ee3c8f7bd6f4a86449ec2a55ec8542b5, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 496024, guid: ee3c8f7bd6f4a86449ec2a55ec8542b5, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 496024, guid: ee3c8f7bd6f4a86449ec2a55ec8542b5, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 496024, guid: ee3c8f7bd6f4a86449ec2a55ec8542b5, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 496024, guid: ee3c8f7bd6f4a86449ec2a55ec8542b5, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 496024, guid: ee3c8f7bd6f4a86449ec2a55ec8542b5, type: 2}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: ee3c8f7bd6f4a86449ec2a55ec8542b5, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1001 &277800089
 Prefab:
   m_ObjectHideFlags: 0
@@ -818,22 +860,12 @@ MonoBehaviour:
     level: 0
     baseSize: 0
     baseSpeed: 0
+    baseDamage: 0
+    prefab: {fileID: 0}
+    sprites: []
     owner:
       id: 0
       name: 
-  available: 0
-  speedSprites:
-  - {fileID: 21300000, guid: bedf930ee1d8f1f40927ed00dc34c145, type: 3}
-  - {fileID: 21300000, guid: 1fc3c9fc3d139d34a8277f238ae896a8, type: 3}
-  - {fileID: 21300000, guid: 5bcfc02d68aa5334d81c082aadcd8acb, type: 3}
-  powerSprites:
-  - {fileID: 21300000, guid: 5adc374de16c3c44097a70307bb935bf, type: 3}
-  - {fileID: 21300000, guid: d9467cafaf3ae1a4daa9f94e4da4ee89, type: 3}
-  - {fileID: 21300000, guid: fb18dfe8e65f49c4c93fee4a65acc945, type: 3}
-  balanceSprites:
-  - {fileID: 21300000, guid: 5d57dbb0fddae7148aa572602948dc80, type: 3}
-  - {fileID: 21300000, guid: f51c8132e33637a4ebf24577c4b5ecae, type: 3}
-  - {fileID: 21300000, guid: 438a751c10bcad94aac2c3785eac5b31, type: 3}
 --- !u!114 &1020551598
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1230,22 +1262,12 @@ MonoBehaviour:
     level: 0
     baseSize: 0
     baseSpeed: 0
+    baseDamage: 0
+    prefab: {fileID: 0}
+    sprites: []
     owner:
       id: 0
       name: 
-  available: 0
-  speedSprites:
-  - {fileID: 21300000, guid: bedf930ee1d8f1f40927ed00dc34c145, type: 3}
-  - {fileID: 21300000, guid: 1fc3c9fc3d139d34a8277f238ae896a8, type: 3}
-  - {fileID: 21300000, guid: 5bcfc02d68aa5334d81c082aadcd8acb, type: 3}
-  powerSprites:
-  - {fileID: 21300000, guid: 5adc374de16c3c44097a70307bb935bf, type: 3}
-  - {fileID: 21300000, guid: d9467cafaf3ae1a4daa9f94e4da4ee89, type: 3}
-  - {fileID: 21300000, guid: fb18dfe8e65f49c4c93fee4a65acc945, type: 3}
-  balanceSprites:
-  - {fileID: 21300000, guid: 5d57dbb0fddae7148aa572602948dc80, type: 3}
-  - {fileID: 21300000, guid: f51c8132e33637a4ebf24577c4b5ecae, type: 3}
-  - {fileID: 21300000, guid: 438a751c10bcad94aac2c3785eac5b31, type: 3}
 --- !u!114 &1336445590
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1372,22 +1394,12 @@ MonoBehaviour:
     level: 0
     baseSize: 0
     baseSpeed: 0
+    baseDamage: 0
+    prefab: {fileID: 0}
+    sprites: []
     owner:
       id: 0
       name: 
-  available: 0
-  speedSprites:
-  - {fileID: 21300000, guid: bedf930ee1d8f1f40927ed00dc34c145, type: 3}
-  - {fileID: 21300000, guid: 1fc3c9fc3d139d34a8277f238ae896a8, type: 3}
-  - {fileID: 21300000, guid: 5bcfc02d68aa5334d81c082aadcd8acb, type: 3}
-  powerSprites:
-  - {fileID: 21300000, guid: 5adc374de16c3c44097a70307bb935bf, type: 3}
-  - {fileID: 21300000, guid: d9467cafaf3ae1a4daa9f94e4da4ee89, type: 3}
-  - {fileID: 21300000, guid: fb18dfe8e65f49c4c93fee4a65acc945, type: 3}
-  balanceSprites:
-  - {fileID: 21300000, guid: 5d57dbb0fddae7148aa572602948dc80, type: 3}
-  - {fileID: 21300000, guid: f51c8132e33637a4ebf24577c4b5ecae, type: 3}
-  - {fileID: 21300000, guid: 438a751c10bcad94aac2c3785eac5b31, type: 3}
 --- !u!222 &1356911559
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1898,22 +1910,12 @@ MonoBehaviour:
     level: 0
     baseSize: 0
     baseSpeed: 0
+    baseDamage: 0
+    prefab: {fileID: 0}
+    sprites: []
     owner:
       id: 0
       name: 
-  available: 0
-  speedSprites:
-  - {fileID: 21300000, guid: bedf930ee1d8f1f40927ed00dc34c145, type: 3}
-  - {fileID: 21300000, guid: 1fc3c9fc3d139d34a8277f238ae896a8, type: 3}
-  - {fileID: 21300000, guid: 5bcfc02d68aa5334d81c082aadcd8acb, type: 3}
-  powerSprites:
-  - {fileID: 21300000, guid: 5adc374de16c3c44097a70307bb935bf, type: 3}
-  - {fileID: 21300000, guid: d9467cafaf3ae1a4daa9f94e4da4ee89, type: 3}
-  - {fileID: 21300000, guid: fb18dfe8e65f49c4c93fee4a65acc945, type: 3}
-  balanceSprites:
-  - {fileID: 21300000, guid: 5d57dbb0fddae7148aa572602948dc80, type: 3}
-  - {fileID: 21300000, guid: f51c8132e33637a4ebf24577c4b5ecae, type: 3}
-  - {fileID: 21300000, guid: 438a751c10bcad94aac2c3785eac5b31, type: 3}
 --- !u!114 &2073484327
 MonoBehaviour:
   m_ObjectHideFlags: 0
