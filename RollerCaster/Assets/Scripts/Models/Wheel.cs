@@ -9,6 +9,7 @@ public class Wheel : MonoBehaviour {
 	public Spell spell;
 	public bool IsAvailable{get{return available;}}
 	public Sprite blockedSprite;
+	public Sprite joystickSprite;
 
 	private bool available = true;
 	private bool isControlMode = false;
@@ -21,11 +22,22 @@ public class Wheel : MonoBehaviour {
 
 	// When the Wheel is initialized
 	void Start() {
+		onReady (0);
 		Randomize ();
 		joystick = GetComponentInChildren<SimpleJoystick>(true);
 		joystick.gameObject.SetActive(false);
 	}
 
+<<<<<<< HEAD
+=======
+	public void onReady (int side) {
+		if (side == 0) {
+			gameObject.GetComponent<RawImage> ().texture = Resources.Load<Texture> ("texture_roller_frame_pink");
+		} else {
+			gameObject.GetComponent<RawImage> ().texture = Resources.Load<Texture> ("texture_roller_frame_blue");
+		}
+	}
+>>>>>>> b4fb6da3008321021b10f7229ac2a50fcd2400de
 
 	void Update() {
 		if (!available) {
@@ -53,12 +65,24 @@ public class Wheel : MonoBehaviour {
 		updateSprite ();
 		available = true;
 	}
+<<<<<<< HEAD
 
 
 	public void CastSpell(SpellType type, int level, int id){
 		joystick.gameObject.SetActive(true);
 		_isControlling = true;
 		NetworkPlayer.current.CastSpell(type, level, id);
+=======
+		
+	public void CastSpell(SpellType spellType, int spellId) {
+		Debug.Log ("CastSpell() is called.");
+
+		// Online communication
+
+		joystick.gameObject.SetActive (true);
+		isControlMode = true;
+		updateSprite ();
+>>>>>>> b4fb6da3008321021b10f7229ac2a50fcd2400de
 	}
 
 	/// <summary>
@@ -74,10 +98,17 @@ public class Wheel : MonoBehaviour {
 		DisableWheel(4);
 	}
 
+<<<<<<< HEAD
+=======
+	public void OnSelfDestroyed() {
+		DisableWheel (4);
+	}
+>>>>>>> b4fb6da3008321021b10f7229ac2a50fcd2400de
 
 	public void OnSpellDestroyed(Spell s) {
 		if(s.id != spell.id)
 			return;
+		DisableWheel (4);
 	}
 
 	/// <summary>
@@ -97,7 +128,9 @@ public class Wheel : MonoBehaviour {
 	}
 
 	public void updateSprite() {
-		if (available) {
+		if (isControlMode) {
+			gameObject.GetComponentInChildren<Image> ().sprite = joystickSprite;
+		} else if (available) {
 			gameObject.GetComponentInChildren<Image> ().sprite = spell.Sprite;
 		} else {
 			gameObject.GetComponentInChildren<Image> ().sprite = blockedSprite;

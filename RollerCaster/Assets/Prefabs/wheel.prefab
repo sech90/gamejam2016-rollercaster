@@ -146,6 +146,7 @@ MonoBehaviour:
       id: 0
       name: 
   blockedSprite: {fileID: 21300000, guid: 23a44ada0d30c474f95ee70bf012d094, type: 3}
+  joystickSprite: {fileID: 21300000, guid: 5c38b16b4562c644d821b43b283705de, type: 3}
 --- !u!114 &11489176
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -361,6 +362,11 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: joystickSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 5c38b16b4562c644d821b43b283705de,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 137030}
