@@ -28,8 +28,7 @@ public class Wheel : MonoBehaviour {
 		joystick.gameObject.SetActive(false);
 	}
 
-<<<<<<< HEAD
-=======
+
 	public void onReady (int side) {
 		if (side == 0) {
 			gameObject.GetComponent<RawImage> ().texture = Resources.Load<Texture> ("texture_roller_frame_pink");
@@ -37,7 +36,6 @@ public class Wheel : MonoBehaviour {
 			gameObject.GetComponent<RawImage> ().texture = Resources.Load<Texture> ("texture_roller_frame_blue");
 		}
 	}
->>>>>>> b4fb6da3008321021b10f7229ac2a50fcd2400de
 
 	void Update() {
 		if (!available) {
@@ -65,25 +63,15 @@ public class Wheel : MonoBehaviour {
 		updateSprite ();
 		available = true;
 	}
-<<<<<<< HEAD
+
 
 
 	public void CastSpell(SpellType type, int level, int id){
 		joystick.gameObject.SetActive(true);
 		_isControlling = true;
 		NetworkPlayer.current.CastSpell(type, level, id);
-=======
-		
-	public void CastSpell(SpellType spellType, int spellId) {
-		Debug.Log ("CastSpell() is called.");
-
-		// Online communication
-
-		joystick.gameObject.SetActive (true);
-		isControlMode = true;
-		updateSprite ();
->>>>>>> b4fb6da3008321021b10f7229ac2a50fcd2400de
 	}
+
 
 	/// <summary>
 	/// API exposed to the server to control a spell
@@ -98,12 +86,6 @@ public class Wheel : MonoBehaviour {
 		DisableWheel(4);
 	}
 
-<<<<<<< HEAD
-=======
-	public void OnSelfDestroyed() {
-		DisableWheel (4);
-	}
->>>>>>> b4fb6da3008321021b10f7229ac2a50fcd2400de
 
 	public void OnSpellDestroyed(Spell s) {
 		if(s.id != spell.id)

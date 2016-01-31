@@ -26,6 +26,9 @@ public class NetworkPlayer : NetworkBehaviour {
 		NetworkId id = GetComponent<NetworkId>();
 		id.AddInitializeListener(()=>{
 			Utils.Log("Player "+name+" ready");	
+
+			if(OnReady != null)
+				OnReady();
 		});
 	}
 		
@@ -68,6 +71,7 @@ public class NetworkPlayer : NetworkBehaviour {
 			Spell sp = obj.Spell;
 			Joystick[sp.id] = 0;
 			spells[sp.id] = null;
+			Utils.Log("spell destroyed "+sp.id+" of "+sp.owner.name);
 
 			RpcSpellDestroyed(sp.id, sp.level);
 		};
@@ -79,6 +83,7 @@ public class NetworkPlayer : NetworkBehaviour {
 	void RpcSpellDestroyed(int id, int level){
 		GameObject obj =  GameObject.FindWithTag("Wheel"+id);
 		Wheel w = obj.GetComponent<Wheel>();
+		w.OnSelfDestroy();
 
 	}
 
