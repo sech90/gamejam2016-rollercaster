@@ -9,6 +9,7 @@ public class Wheel : MonoBehaviour {
 	public Spell spell;
 	public bool IsAvailable{get{return available;}}
 	public Sprite blockedSprite;
+	public Sprite joystickSprite;
 
 	private bool available = true;
 	private bool isControlMode = false;
@@ -19,9 +20,18 @@ public class Wheel : MonoBehaviour {
 
 	// When the Wheel is initialized
 	void Start() {
+		onReady (0);
 		Randomize ();
 		joystick = GetComponentInChildren<SimpleJoystick>(true);
 		//joystick.gameObject.SetActive(false);
+	}
+
+	public void onReady (int side) {
+		if (side == 0) {
+			gameObject.GetComponent<RawImage> ().texture = Resources.Load<Texture> ("texture_roller_frame_pink");
+		} else {
+			gameObject.GetComponent<RawImage> ().texture = Resources.Load<Texture> ("texture_roller_frame_blue");
+		}
 	}
 
 	void Update() {
@@ -50,16 +60,15 @@ public class Wheel : MonoBehaviour {
 		updateSprite ();
 		available = true;
 	}
-
-	/// <summary>
-	/// API exposed to the server to cast a spell.
-	/// </summary>
-	/// <param name="spellType">Spell type.</param>
-	/// <param name="spellId">Spell identifier.</param>
+		
 	public void CastSpell(SpellType spellType, int spellId) {
 		Debug.Log ("CastSpell() is called.");
+
+		// Online communication
+
 		joystick.gameObject.SetActive (true);
 		isControlMode = true;
+		updateSprite ();
 	}
 
 	/// <summary>
@@ -71,9 +80,14 @@ public class Wheel : MonoBehaviour {
 		Debug.Log ("Spell " + spellId + " value " + joystickValue);
 	}
 
+	public void OnSelfDestroyed() {
+		DisableWheel (4);
+	}
+
 	public void OnSpellDestroyed(Spell s) {
 		if(s.id != spell.id)
 			return;
+		DisableWheel (4);
 	}
 
 	/// <summary>
@@ -93,7 +107,9 @@ public class Wheel : MonoBehaviour {
 	}
 
 	public void updateSprite() {
-		if (available) {
+		if (isControlMode) {
+			gameObject.GetComponentInChildren<Image> ().sprite = joystickSprite;
+		} else if (available) {
 			gameObject.GetComponentInChildren<Image> ().sprite = spell.Sprite;
 		} else {
 			gameObject.GetComponentInChildren<Image> ().sprite = blockedSprite;
