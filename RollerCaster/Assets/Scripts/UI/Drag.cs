@@ -4,8 +4,6 @@ using System.Collections;
 using UnityEngine.EventSystems;
 
 public class Drag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler, IPointerDownHandler, IPointerUpHandler {
-	private Vector3 screenPoint;
-	private Vector3 offset;
 	public static GameObject dragged;
 
 //	public bool record;
@@ -13,15 +11,18 @@ public class Drag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
 	public bool singleClick;
 
 	Vector3 startPosition;
-	Transform startParent;
 
-	public void Update () {
+	public void Start() {
+		GetComponentInParent<HorizontalLayoutGroup> ().enabled = false;
+	}
+
+//	public void Update () {
 		// Keep adding to currentTime if record is true
 //		if (record)
 //			clickTime += 1f * Time.deltaTime;
 //		else
 //			clickTime = 0f;
-	}
+//	}
 
 	public void OnPointerDown(PointerEventData eventData) {
 		Debug.Log ("mouse down called");
@@ -29,8 +30,10 @@ public class Drag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
 	}
 
 	public void OnPointerUp(PointerEventData eventData) {
-		if (singleClick)
-			transform.parent.GetComponent<Wheel> ().Randomize ();
+		if (singleClick) {
+			Debug.Log ("SPELL CAST");
+			transform.parent.GetComponent<Wheel> ().DisableWheel (2);
+		}
 	}
 
 //	void OnMouseDrag()
@@ -82,7 +85,7 @@ public class Drag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
 			Wheel draggedWheel = dragged.transform.parent.GetComponent<Wheel> ();
 			Debug.Log (dragged.name + ", type " + draggedWheel.spell.type + " is dropped on " + gameObject.name + ", type " + triggerWheel.spell.type);
 			if (triggerWheel.Stack (draggedWheel.spell)) {
-				draggedWheel.Randomize ();
+				draggedWheel.DisableWheel (2);
 			}
 		}
 		dragged = null;
