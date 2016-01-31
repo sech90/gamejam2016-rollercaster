@@ -8,37 +8,70 @@ using CnControls;
 public class Wheel : MonoBehaviour {
 	public Spell spell;
 	public bool IsAvailable{get{return available;}}
+	public Sprite blockedSprite;
+
+	private bool available = true;
+	private bool isControlMode = false;
+	private float cooldown;
 
 	private SimpleJoystick joystick;
-	private bool available;
 
 
 	// When the Wheel is initialized
 	void Start() {
 		Randomize ();
-		joystick = GetComponentInChildren<SimpleJoystick>();
+		joystick = GetComponentInChildren<SimpleJoystick>(true);
 		//joystick.gameObject.SetActive(false);
+	}
+
+	void Update() {
+		if (!available) {
+			cooldown -= 1f * Time.deltaTime;
+			if (cooldown <= 0) {
+				available = true;
+				Randomize ();
+			}
+		}
+
+		if (isControlMode) {
+			float y = CnInputManager.GetAxis (joystick.VerticalAxisName);
+			Move (spell.id, y);
+		}
 	}
 
 	/// <summary>
 	/// Get the next random spell.
 	/// </summary>
 	public void Randomize() {
+		int id_aux = spell.id;
 		spell = SpellDB.GetRandom();
-		Debug.Log ("New spell: " + spell.type);
+		spell.id = id_aux;
+//		Debug.Log ("New spell: " + spell.type);
 		updateSprite ();
 		available = true;
 	}
 
-	public void CastSpell(){
-		
+	/// <summary>
+	/// API exposed to the server to cast a spell
+	/// </summary>
+	public void CastSpell() {
+		Debug.Log ("CastSpell() is called.");
+		joystick.gameObject.SetActive (true);
+		isControlMode = true;
 	}
 
-	public void OnSpellDestroyed(Spell s){
+	/// <summary>
+	/// API exposed to the server to control a spell
+	/// </summary>
+	/// <param name="spellId">Spell identifier.</param>
+	/// <param name="joystickValue">Joystick value.</param>
+	public void Move(int spellId, float joystickValue) {
+		Debug.Log ("Spell " + spellId + " value " + joystickValue);
+	}
+
+	public void OnSpellDestroyed(Spell s) {
 		if(s.id != spell.id)
 			return;
-
-
 	}
 
 	/// <summary>
@@ -49,7 +82,6 @@ public class Wheel : MonoBehaviour {
 	public bool Stack(Spell next) {
 		if (!spell.Stack(next)) {
 			Debug.Log ("Stack failed");
-			updateSprite ();
 			return false;
 		} else {
 			Debug.Log ("Stack success");
@@ -59,9 +91,17 @@ public class Wheel : MonoBehaviour {
 	}
 
 	public void updateSprite() {
-		
-		gameObject.GetComponentInChildren<Image> ().sprite = spell.Sprite;
+		if (available) {
+			gameObject.GetComponentInChildren<Image> ().sprite = spell.Sprite;
+		} else {
+			gameObject.GetComponentInChildren<Image> ().sprite = blockedSprite;
+		}
+	}
 
+	public void DisableWheel(float time) {
+		available = false;
+		cooldown = time;
+		updateSprite ();
 	}
 
 }
