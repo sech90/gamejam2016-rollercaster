@@ -223,14 +223,17 @@ MonoBehaviour:
   m_ScriptCRCCheck: 1
   m_MaxDelay: 0.01
   m_LogLevel: 2
-  m_PlayerPrefab: {fileID: 0}
+  m_PlayerPrefab: {fileID: 133942, guid: 1fc078b13d7c34140b3cea6f52072f1a, type: 2}
   m_AutoCreatePlayer: 1
-  m_PlayerSpawnMethod: 0
+  m_PlayerSpawnMethod: 1
   m_OfflineScene: OfflineScene
   m_OnlineScene: ChristianSceneTest
-  m_SpawnPrefabs: []
-  m_CustomConfig: 0
-  m_MaxConnections: 4
+  m_SpawnPrefabs:
+  - {fileID: 147062, guid: 0dd0990053877a844b8058ac7eed817d, type: 2}
+  - {fileID: 164808, guid: be3f8fb162496004ca28a82881c799bf, type: 2}
+  - {fileID: 185652, guid: c23d88937ae2ed74b9f47b2c431d4dfa, type: 2}
+  m_CustomConfig: 1
+  m_MaxConnections: 2
   m_ConnectionConfig:
     m_PacketSize: 1500
     m_FragmentSize: 500
@@ -257,7 +260,7 @@ MonoBehaviour:
     m_ReactorMaximumReceivedMessages: 1024
     m_ReactorMaximumSentMessages: 1024
     m_MaxPacketSize: 2000
-  m_Channels: 
+  m_Channels: 0500000000000000
   m_UseWebSockets: 0
   m_UseSimulator: 0
   m_SimulatedLatency: 1

@@ -16,6 +16,8 @@ public class Wheel : MonoBehaviour {
 	private float cooldown;
 
 	private SimpleJoystick joystick;
+	private bool _isControlling = false;
+
 
 
 	// When the Wheel is initialized
@@ -23,9 +25,9 @@ public class Wheel : MonoBehaviour {
 		onReady (0);
 		Randomize ();
 		joystick = GetComponentInChildren<SimpleJoystick>(true);
-		//joystick.gameObject.SetActive(false);
+		joystick.gameObject.SetActive(false);
 	}
-
+		
 	public void onReady (int side) {
 		if (side == 0) {
 			gameObject.GetComponent<RawImage> ().texture = Resources.Load<Texture> ("texture_roller_frame_pink");
@@ -60,14 +62,11 @@ public class Wheel : MonoBehaviour {
 		updateSprite ();
 		available = true;
 	}
-		
-	public void CastSpell(SpellType spellType, int level, int spellId) {
-		Debug.Log ("CastSpell() is called.");
 
-		// Online communication
-
-		joystick.gameObject.SetActive (true);
+	public void CastSpell(SpellType type, int level, int id){
+		joystick.gameObject.SetActive(true);
 		_isControlling = true;
+		NetworkPlayer.current.CastSpell(type, level, id);
 		updateSprite ();
 	}
 
@@ -77,10 +76,13 @@ public class Wheel : MonoBehaviour {
 	/// <param name="spellId">Spell identifier.</param>
 	/// <param name="joystickValue">Joystick value.</param>
 	public void Move(int spellId, float joystickValue) {
-		Debug.Log ("Spell " + spellId + " value " + joystickValue);
-		// NETWORK PLAYER
+		NetworkPlayer.current.Move(spellId, joystickValue);
 	}
 
+	public void OnSelfDestroy() {
+		DisableWheel(4);
+	}
+		
 	public void OnSelfDestroyed() {
 		DisableWheel (4);
 	}
