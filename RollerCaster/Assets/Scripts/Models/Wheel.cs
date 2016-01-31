@@ -12,7 +12,7 @@ public class Wheel : MonoBehaviour {
 	public Sprite joystickSprite;
 
 	private bool available = true;
-	private bool isControlMode = false;
+	private bool _isControlling = false;
 	private float cooldown;
 
 	private SimpleJoystick joystick;
@@ -43,7 +43,7 @@ public class Wheel : MonoBehaviour {
 			}
 		}
 
-		if (isControlMode) {
+		if (_isControlling) {
 			float y = CnInputManager.GetAxis (joystick.VerticalAxisName);
 			Move (spell.id, y);
 		}
@@ -61,13 +61,13 @@ public class Wheel : MonoBehaviour {
 		available = true;
 	}
 		
-	public void CastSpell(SpellType spellType, int spellId) {
+	public void CastSpell(SpellType spellType, int level, int spellId) {
 		Debug.Log ("CastSpell() is called.");
 
 		// Online communication
 
 		joystick.gameObject.SetActive (true);
-		isControlMode = true;
+		_isControlling = true;
 		updateSprite ();
 	}
 
@@ -78,6 +78,7 @@ public class Wheel : MonoBehaviour {
 	/// <param name="joystickValue">Joystick value.</param>
 	public void Move(int spellId, float joystickValue) {
 		Debug.Log ("Spell " + spellId + " value " + joystickValue);
+		// NETWORK PLAYER
 	}
 
 	public void OnSelfDestroyed() {
@@ -87,7 +88,7 @@ public class Wheel : MonoBehaviour {
 	public void OnSpellDestroyed(Spell s) {
 		if(s.id != spell.id)
 			return;
-		DisableWheel (4);
+		else DisableWheel (4);
 	}
 
 	/// <summary>
@@ -107,7 +108,7 @@ public class Wheel : MonoBehaviour {
 	}
 
 	public void updateSprite() {
-		if (isControlMode) {
+		if (_isControlling) {
 			gameObject.GetComponentInChildren<Image> ().sprite = joystickSprite;
 		} else if (available) {
 			gameObject.GetComponentInChildren<Image> ().sprite = spell.Sprite;
