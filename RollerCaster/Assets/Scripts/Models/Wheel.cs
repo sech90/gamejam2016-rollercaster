@@ -17,29 +17,42 @@ public class Wheel : MonoBehaviour {
 
 	private SimpleJoystick joystick;
 
-
+	public Side wheelSide;
+	public bool ready = false;
 
 	// When the Wheel is initialized
 	void Start() {
-		onReady (0);
-		Randomize ();
-		joystick = GetComponentInChildren<SimpleJoystick>(true);
-		joystick.gameObject.SetActive(false);
+
+		//onReady (0);
+//		Randomize ();
+//		joystick = GetComponentInChildren<SimpleJoystick>(true);
+//		joystick.gameObject.SetActive(false);
 	}
 		
-	public void onReady (int side) {
-		if (side == 0) {
+	public void onReady (Side side) {
+		wheelSide = side;
+		if (side == Side.LEFT) {
 			gameObject.GetComponent<RawImage> ().texture = Resources.Load<Texture> ("texture_roller_frame_pink");
 		} else {
 			gameObject.GetComponent<RawImage> ().texture = Resources.Load<Texture> ("texture_roller_frame_blue");
 		}
+		Debug.Log ("Side: " + (int)side);
+		Randomize ();
+		joystick = GetComponentInChildren<SimpleJoystick>(true);
+		joystick.gameObject.SetActive(false);
+		ready = true;
 	}
 
 	void Update() {
+		if (!ready) {
+			if (NetworkPlayer.current != null) {
+				onReady(NetworkPlayer.current.side);
+			} else 
+				return;
+		}
 		if (!available) {
 			cooldown -= 1f * Time.deltaTime;
 			if (cooldown <= 0) {
-				available = true;
 				Randomize ();
 			}
 		}
@@ -57,17 +70,18 @@ public class Wheel : MonoBehaviour {
 		int id_aux = spell.id;
 		spell = SpellDB.GetRandom();
 		spell.id = id_aux;
-//		Debug.Log ("New spell: " + spell.type);
-		updateSprite ();
-		available = true;
+		//		Debug.Log ("New spell: " + spell.type);
+		EnableWheel();
 	}
 
 	public void CastSpell(SpellType type, int level, int id){
+		Debug.Log ("Side " + wheelSide + " is casting a spell");
 		joystick.gameObject.SetActive(true);
 		_isControlling = true;
 		NetworkPlayer.current.CastSpell(type, level, id);
 		updateSprite ();
 	}
+
 
 	/// <summary>
 	/// API exposed to the server to control a spell
@@ -79,11 +93,8 @@ public class Wheel : MonoBehaviour {
 	}
 
 	public void OnSelfDestroy() {
+		Debug.Log (name + " is destroyed.");
 		DisableWheel(4);
-	}
-		
-	public void OnSelfDestroyed() {
-		DisableWheel (4);
 	}
 
 	public void OnSpellDestroyed(Spell s) {
@@ -119,8 +130,17 @@ public class Wheel : MonoBehaviour {
 	}
 
 	public void DisableWheel(float time) {
+		if (_isControlling) {
+			joystick.gameObject.SetActive(false);
+			_isControlling = false;
+		}
 		available = false;
 		cooldown = time;
+		updateSprite ();
+	}
+
+	public void EnableWheel() {
+		available = true;
 		updateSprite ();
 	}
 

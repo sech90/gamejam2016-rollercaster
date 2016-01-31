@@ -11,6 +11,8 @@ public class Spell {
 	public int baseSpeed = 1;
 	public int baseDamage = 1;
 
+	public Side side;
+
 	public int Size{get{return baseSize * level;}}
 	public int Speed{get{return baseSpeed * level;}}
 	public int Damage{get{return baseDamage * level;}}

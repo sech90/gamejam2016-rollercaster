@@ -20,19 +20,6 @@ public class NetworkSpell : NetworkBehaviour {
 
 	public Spell Spell{get{return spell;}}
 
-	public override void OnStartClient (){																												
-		Utils.Log("New Spell "+name+" created by "+spell.owner);
-
-		if(isServer)
-			return;
-	}
-
-	public void EnableControl(SimpleJoystick stick){
-		hAxis = stick.HorizontalAxisName;
-		yAxis = stick.VerticalAxisName;
-		_enabled = true;
-	}
-
 	public void DestroySpell(){
 		_enabled = false;
 		if(OnDestroy != null)
@@ -54,12 +41,7 @@ public class NetworkSpell : NetworkBehaviour {
 			DestroySpell();
 		
 	}
-
-	[ClientRpc]
-	public void RpcSetSpell(SpellType type, int level, Side side){
-		SetSpell(SpellDB.GetSpell(type, level), side);
-	}
-
+		
 	[Server]
 	public void SetSpell(Spell s, Side side){
 		Utils.Log("SetSpell called on "+(isServer ? (isClient ? "host" : "server") : "client"));

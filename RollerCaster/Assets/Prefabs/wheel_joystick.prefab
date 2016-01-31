@@ -316,9 +316,7 @@ MonoBehaviour:
     baseDamage: 0
     prefab: {fileID: 0}
     sprites: []
-    owner:
-      id: 0
-      name: 
+    owner: {fileID: 0}
   blockedSprite: {fileID: 21300000, guid: 23a44ada0d30c474f95ee70bf012d094, type: 3}
   joystickSprite: {fileID: 21300000, guid: 5c38b16b4562c644d821b43b283705de, type: 3}
 --- !u!114 &11436424
@@ -394,7 +392,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Texture: {fileID: 2800000, guid: 97b842131dbb6834984d029a1c2c2d0c, type: 3}
+  m_Texture: {fileID: 2800000, guid: 586e2f28c9ae8d047beab6c8cea51b33, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -795,7 +793,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Texture
       value: 
-      objectReference: {fileID: 2800000, guid: 97b842131dbb6834984d029a1c2c2d0c, type: 3}
+      objectReference: {fileID: 2800000, guid: 586e2f28c9ae8d047beab6c8cea51b33, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 169592}

@@ -8,9 +8,9 @@ public enum Side{LEFT, RIGHT}
 
 public class NetworkPlayer : NetworkBehaviour {
 
-	private Side side;
+	public Side side;
 	public static NetworkPlayer current{get;private set;}
-	public event Action OnReady;
+	public event Action<Side> OnReady;
 	public NetworkSpell[] spells;
 	public float[] Joystick;
 
@@ -26,6 +26,9 @@ public class NetworkPlayer : NetworkBehaviour {
 		NetworkId id = GetComponent<NetworkId>();
 		id.AddInitializeListener(()=>{
 			Utils.Log("Player "+name+" ready");	
+
+			if(OnReady != null)
+				OnReady(side);
 		});
 	}
 		
@@ -43,18 +46,19 @@ public class NetworkPlayer : NetworkBehaviour {
 
 	[Client]
 	public void CastSpell(SpellType type, int level, int id){
-		Utils.Log(name+" cast "+type+" "+level+" on "+(isServer ? "server" : "client"));
+//		Utils.Log(name+" cast "+type+" "+level+" on "+(isServer ? "server" : "client"));
 		CmdSpawnSpell(type, level, id);
 	}
 
 
 	[Command]
-	public void CmdSpawnSpell(SpellType type, int level, int id){
-		Utils.Log("Player "+name+" cast spell");
+	public void CmdSpawnSpell(SpellType type, int level, int id) {
+//		Utils.Log("Player "+name+" cast spell");
 
 		//get spell and assign id
 		Spell s = SpellDB.GetSpell(type, level);
 		s.id = id;
+		s.side = side;
 
 		//instantiate acual spell
 		GameObject go = Instantiate(s.prefab, transform.position, Quaternion.identity) as GameObject;
@@ -68,18 +72,22 @@ public class NetworkPlayer : NetworkBehaviour {
 			Spell sp = obj.Spell;
 			Joystick[sp.id] = 0;
 			spells[sp.id] = null;
+//			Utils.Log("spell destroyed "+sp.id+" of "+sp.owner.name);
 
-			RpcSpellDestroyed(sp.id, sp.level);
+			RpcSpellDestroyed(sp.side, sp.id, sp.level);
 		};
 
 		//RpcSpellCasted(go.tag);
 	}
 		
 	[ClientRpc]
-	void RpcSpellDestroyed(int id, int level){
-		GameObject obj =  GameObject.FindWithTag("Wheel"+id);
-		Wheel w = obj.GetComponent<Wheel>();
-
+	void RpcSpellDestroyed(Side spellSide, int id, int level) {
+		GameObject obj = GameObject.FindWithTag ("Wheel" + id);
+		Wheel w = obj.GetComponent<Wheel> ();
+		Debug.Log ("Destroy call from spell side " + spellSide + " to player side " + w.wheelSide);
+		if (w.wheelSide == spellSide) {
+			w.OnSelfDestroy ();
+		}
 	}
 
 	[Client]
