@@ -13,7 +13,6 @@ public class DragWithJoystick : MonoBehaviour, IBeginDragHandler, IDragHandler, 
 	Vector3 startPosition;
 
 	public void Start() {
-		GetComponentInParent<HorizontalLayoutGroup> ().enabled = false;
 	}
 
 	//	public void Update () {

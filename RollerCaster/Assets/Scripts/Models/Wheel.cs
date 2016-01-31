@@ -52,9 +52,11 @@ public class Wheel : MonoBehaviour {
 	}
 
 	/// <summary>
-	/// API exposed to the server to cast a spell
+	/// API exposed to the server to cast a spell.
 	/// </summary>
-	public void CastSpell() {
+	/// <param name="spellType">Spell type.</param>
+	/// <param name="spellId">Spell identifier.</param>
+	public void CastSpell(SpellType spellType, int spellId) {
 		Debug.Log ("CastSpell() is called.");
 		joystick.gameObject.SetActive (true);
 		isControlMode = true;
