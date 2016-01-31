@@ -30,7 +30,8 @@ public class DragWithJoystick : MonoBehaviour, IBeginDragHandler, IDragHandler, 
 
 	public void OnPointerUp(PointerEventData eventData) {
 		if (singleClick) {
-			transform.parent.GetComponent<Wheel> ().CastSpell ();
+			Wheel w = transform.parent.GetComponent<Wheel> ();
+			w.CastSpell (w.spell.type, w.spell.id);
 		}
 	}
 
