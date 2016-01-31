@@ -16,7 +16,6 @@ public class Wheel : MonoBehaviour {
 	private float cooldown;
 
 	private SimpleJoystick joystick;
-	private bool _isControlling = false;
 
 
 
