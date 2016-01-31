@@ -25,9 +25,6 @@ public class NetworkSpell : NetworkBehaviour {
 
 		if(isServer)
 			return;
-
-		GetComponent<Collider2D>().enabled = false;
-
 	}
 
 	public void EnableControl(SimpleJoystick stick){
@@ -63,8 +60,10 @@ public class NetworkSpell : NetworkBehaviour {
 		SetSpell(SpellDB.GetSpell(type, level), side);
 	}
 
+	[Server]
 	public void SetSpell(Spell s, Side side){
 		Utils.Log("SetSpell called on "+(isServer ? (isClient ? "host" : "server") : "client"));
+
 		if(side == Side.LEFT){
 			hDir = Vector2.right;
 			gameObject.layer = LayerMask.NameToLayer("SpellLeft");
@@ -78,18 +77,14 @@ public class NetworkSpell : NetworkBehaviour {
 		sRend = GetComponentInChildren<SpriteRenderer>();
 		body = GetComponent<Rigidbody2D>();
 		sRend.sprite = s.Sprite;
-
-		if(!isClient)
-			RpcSetSpell(s.type, s.level, side);
 	}
 
 	void Update(){
 	//	Debug.Log(_enabled+" oo "+isClient+" "+(isServer ? (isClient ? "host" : "server") : "client")+" "+hasAuthority+" "+name);
-		if(!_enabled || !hasAuthority)
+		if(!_enabled)
 			return;
 
-		//Debug.Log("aa "+ isClient);
-		float y = Input.GetAxis("Vertical");
+		float y = spell.owner.Joystick[spell.id];
 		Vector2 dir = hDir + y * Vector2.up;
 		dir.Normalize();
 

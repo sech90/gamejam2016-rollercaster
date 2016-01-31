@@ -31,8 +31,14 @@ public class Utils {
 	}
 
 	public static void Log(string mex){
-		Text t = GameObject.FindObjectOfType<Text>();
-		t.text = mex+"\n"+t.text;
+		GameObject obj = GameObject.FindWithTag("DebugText");
+		Debug.Log(mex);
+		if(obj != null){
+			Text t = obj.GetComponent<Text>();
+			if(t == null)
+				return;
+			t.text = mex+"\n"+t.text;
+		}
 	}
 
 }

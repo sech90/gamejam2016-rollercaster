@@ -5,6 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - Wheels
+  - DebugText
+  - Wheel0
+  - Wheel1
+  - Wheel2
+  - Wheel3
   layers:
   - Default
   - TransparentFX

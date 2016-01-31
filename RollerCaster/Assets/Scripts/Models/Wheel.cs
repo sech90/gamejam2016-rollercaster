@@ -55,10 +55,10 @@ public class Wheel : MonoBehaviour {
 	}
 
 
-	public void CastSpell(){
+	public void CastSpell(SpellType type, int level, int id){
 		joystick.gameObject.SetActive(true);
-
 		_isControlling = true;
+		NetworkPlayer.current.CastSpell(type, level, id);
 	}
 
 	/// <summary>
@@ -67,8 +67,13 @@ public class Wheel : MonoBehaviour {
 	/// <param name="spellId">Spell identifier.</param>
 	/// <param name="joystickValue">Joystick value.</param>
 	public void Move(int spellId, float joystickValue) {
-		Debug.Log ("Spell " + spellId + " value " + joystickValue);
+		NetworkPlayer.current.Move(spellId, joystickValue);
 	}
+
+	public void OnSelfDestroy() {
+		DisableWheel(4);
+	}
+
 
 	public void OnSpellDestroyed(Spell s) {
 		if(s.id != spell.id)

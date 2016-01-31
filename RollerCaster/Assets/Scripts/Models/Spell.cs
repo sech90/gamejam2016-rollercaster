@@ -19,7 +19,7 @@ public class Spell {
 	public GameObject prefab;
 	public Sprite[] sprites;
 
-	public string owner;
+	public NetworkPlayer owner;
 
 	public Spell (SpellType type, int level)
 	{
