@@ -19,7 +19,7 @@ public class Spell {
 	public GameObject prefab;
 	public Sprite[] sprites;
 
-	public Wizard owner;
+	public string owner;
 
 	public Spell (SpellType type, int level)
 	{
@@ -32,7 +32,7 @@ public class Spell {
 	/// </summary>
 	/// <param name="other">The spell being collided with</param>
 	/// <returns>True if the spell survives</returns>
-	public bool Resolve(Spell other) {
+	public bool Defeats(Spell other) {
 		if (level <= other.level) {
 			return false;
 		} else {

@@ -46,7 +46,7 @@ MonoBehaviour:
     baseSize: 5
     baseSpeed: 5
     baseDamage: 10
-    prefab: {fileID: 0}
+    prefab: {fileID: 164808, guid: be3f8fb162496004ca28a82881c799bf, type: 2}
     sprites:
     - {fileID: 21300000, guid: 6f0c9e9ce53d2ea4f8f8564cb68c0f45, type: 3}
     - {fileID: 21300000, guid: a84330459aebc3f43859ba76c761b5b3, type: 3}
@@ -60,8 +60,8 @@ MonoBehaviour:
     level: 1
     baseSize: 5
     baseSpeed: 10
-    baseDamage: 1
-    prefab: {fileID: 0}
+    baseDamage: 5
+    prefab: {fileID: 185652, guid: c23d88937ae2ed74b9f47b2c431d4dfa, type: 2}
     sprites:
     - {fileID: 21300000, guid: aac1347f00a71d548b07bac237766cdc, type: 3}
     - {fileID: 21300000, guid: 7b7a93de12dfc8b4a9ede799341b2265, type: 3}
@@ -73,10 +73,10 @@ MonoBehaviour:
     id: 0
     type: 0
     level: 1
-    baseSize: 5
-    baseSpeed: 5
-    baseDamage: 5
-    prefab: {fileID: 0}
+    baseSize: 7
+    baseSpeed: 7
+    baseDamage: 7
+    prefab: {fileID: 147062, guid: 0dd0990053877a844b8058ac7eed817d, type: 2}
     sprites:
     - {fileID: 21300000, guid: f7a5c3266ffff3c43b7c9f6ccaf1e480, type: 3}
     - {fileID: 21300000, guid: e7c29da348b08f4438849247cfc1b50a, type: 3}
@@ -90,7 +90,23 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: SpeedSpell.baseDamage
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: BalanceSpell.baseSize
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: BalanceSpell.baseSpeed
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: BalanceSpell.baseDamage
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 171170}

@@ -15,14 +15,17 @@ public class Wheel : MonoBehaviour {
 	private float cooldown;
 
 	private SimpleJoystick joystick;
+	private bool _isControlling = false;
+
 
 
 	// When the Wheel is initialized
 	void Start() {
 		Randomize ();
 		joystick = GetComponentInChildren<SimpleJoystick>(true);
-		//joystick.gameObject.SetActive(false);
+		joystick.gameObject.SetActive(false);
 	}
+
 
 	void Update() {
 		if (!available) {
@@ -33,7 +36,7 @@ public class Wheel : MonoBehaviour {
 			}
 		}
 
-		if (isControlMode) {
+		if (_isControlling) {
 			float y = CnInputManager.GetAxis (joystick.VerticalAxisName);
 			Move (spell.id, y);
 		}
@@ -51,15 +54,11 @@ public class Wheel : MonoBehaviour {
 		available = true;
 	}
 
-	/// <summary>
-	/// API exposed to the server to cast a spell.
-	/// </summary>
-	/// <param name="spellType">Spell type.</param>
-	/// <param name="spellId">Spell identifier.</param>
-	public void CastSpell(SpellType spellType, int spellId) {
-		Debug.Log ("CastSpell() is called.");
-		joystick.gameObject.SetActive (true);
-		isControlMode = true;
+
+	public void CastSpell(){
+		joystick.gameObject.SetActive(true);
+
+		_isControlling = true;
 	}
 
 	/// <summary>

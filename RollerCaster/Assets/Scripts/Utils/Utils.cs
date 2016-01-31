@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class Utils {
 
@@ -27,6 +28,11 @@ public class Utils {
 			}
 		}
 		filter.mesh.triangles = indices.ToArray();
+	}
+
+	public static void Log(string mex){
+		Text t = GameObject.FindObjectOfType<Text>();
+		t.text = mex+"\n"+t.text;
 	}
 
 }
